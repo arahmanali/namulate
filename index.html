@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Namulate App</title>
+    <script type="text/javascript" src="js/lib/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular.min.js"></script>
+    <!--<script type="text/javascript" src="js/lib/angular-animate.min.js"></script>-->
+    <script type="text/javascript" src="js/namulate.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/custom.css"/>
+</head>
+<body ng-app="namulate" class="bg-image">
+<form name="namulateForm" role="form" novalidate>
+<div class="container top-margin col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6" ng-controller="namCtrl">
+        <!--Panel-->
+        <div class="panel panel-primary">
+        <!--Panel Header-->
+            <div class="panel-heading">Namulate You!</div>
+            <!--Panel Body-->
+            <div class="panel-body">
+                <!--Hide Panel-->
+                <div ng-hide="TextName">
+                <!--Modal Header-->
+                <div class="text-center">
+                <h3><span class="text-primary">Hello there!</span></h3>
+                <h5><span class="text-info">Enter you name and see what your name says about you</span></h5>
+                </div>
+                <!--Modal Body-->
+                <div class="text-center modal-body" ng-class="{ 'has-error' : namulateForm.name.$invalid && name.$pristine }">
+                    <div class="help-block"><span class="label label-warning" ng-show="namulateForm.name.$error.pattern">
+                        Sorry! This is not a valid Name!</span>
+                    <!--<p ng-show="namulateForm.name.$error.required && !namulateForm.name.$pristine">Empty box is not allowed please enter Name!</p>-->
+                    </div>
+                <label>
+                    <input id="Name" type="text" ng-model="textIn" placeholder="Type Your Full Name" name="name" autofocus
+                    class="input-lg form-control text-center" ng-pattern="/^[a-zA-Z ]+$/" required/>
+                </label>
+                </div>
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-lg btn-primary" ng-click="Namulate()" ng-disabled="!textIn">Namulate</button>
+                </div>
+                </div>
+
+
+
+                <!--Result Modal-->
+                <div ng-hide="!TextName">
+                    <div class="modal-header text-primary text-center">
+                        <h3>Your Name Mystery Solved!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-condensed">
+                        <tr class="active"><td>Name you entered is</td><td></td><td></td>
+                            <td class="text-success"><strong>{{ TextName }}</strong></td></tr>
+                        <tr class="active"><td>Your Number by Name is</td><td></td><td></td>
+                            <td class="text-success"><strong>{{ ResultNum }}</strong></td></tr>
+                        <tr class="active"><td>Your Color by Name is</td><td></td><td></td>
+                            <td class="text-success"><strong>{{ ResultColor }}</strong></td></tr>
+                        <tr class="active"><td>Your Characteristics are</td><td></td><td></td>
+                            <td class="text-success"><strong>{{ ResultProp }}</strong></td></tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-lg btn-primary" ng-click="Restart()">
+                             <span class="glyphicon glyphicon-repeat"></span> ReNamulate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</form>
+
+</body>
+</html>
